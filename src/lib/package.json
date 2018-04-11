@@ -1,0 +1,21 @@
+{
+  "name": "ionic-alert-service",
+  "version": "0.1.0",
+  "repository": {
+    "type": "git",
+    "url": "url"
+  },
+  "keywords": [
+    "angular"
+  ],
+  "license": "MIT",
+  "main": "./bundles/ionic-alert-service.umd.js",
+  "es2015": "./esm2015/ionic-alert-service.js",
+  "module": "./esm5/ionic-alert-service.es5.js",
+  "typings": "./ionic-alert-service.d.ts",
+  "peerDependencies": {
+    "@angular/core": "^5.0.0",
+    "@angular/common": "^5.0.0",
+    "@angular/http": "^5.0.0"
+  }
+}
