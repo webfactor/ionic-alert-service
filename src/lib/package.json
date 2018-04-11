@@ -14,8 +14,7 @@
   "module": "./esm5/ionic-alert-service.es5.js",
   "typings": "./ionic-alert-service.d.ts",
   "peerDependencies": {
-    "@angular/core": "^5.0.0",
-    "@angular/common": "^5.0.0",
-    "@angular/http": "^5.0.0"
+    "@ngx-translate/core": "^9.1.1",
+    "ionic-angular": "^3.9.2"
   }
 }
