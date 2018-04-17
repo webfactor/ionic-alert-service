@@ -1,28 +1,60 @@
 # AlertService
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.4.2.
+Displays alerts and confirmation dialogs and toasts the easy way! 🚨 
 
-## Development server
+## Installation
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+- Install `@webfactor/ionic-alert-service` via npm.
+- Add `AlertServiceModule.forRoot()` to your Ionic module imports.
 
-## Code scaffolding
+This service epends on `@ngx-translate/core', which should be installed and implemented.  
+The dialogs expect the following translations. If not present, "Ok" and "Abbrechen" are used.
+```json
+{
+    "global": {
+        "ok": "Yep!",
+        "cancel": "Nope!"
+    }
+}
+```
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Methods
+```typescript
+alert(message: string, title: string = null, subTitle: string = null): Promise<any>
+```
+Presents an alert. The Promise is fulfilled when closing the dialog.
 
-## Build
+```typescript
+confirm(message: string, title: string = null, subTitle: string = null): Promise<any>
+```
+Presents an confirmation dialog. The Promise is fulfilled on accept, rejected on decline.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
+```typescript
+shortToast(message: string, position: 'top' | 'middle' | 'bottom' = 'bottom'): Promise<any>
 
-## Running unit tests
+longToast(message: string, position: 'top' | 'middle' | 'bottom' = 'bottom'): Promise<any>
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+toastWithOptions(
+    message: string,
+    position: 'top' | 'middle' | 'bottom' = 'bottom',
+    duration: number = 2500,
+    showCloseButton: boolean = false,
+    closeButtonText: string = 'OK'
+): Promise<any>
+```
+Presents a toast message.  
+The Promise is fulfilled when transition is completed.
 
-## Running end-to-end tests
+## Example
+```typescript
+constructor(private alertService: AlertService) {}
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-Before running the tests make sure you are serving the app via `ng serve`.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+confirmPizzaOrder(): void {
+    this.alertService.confirm('Do you really want to order a triple cheese pizza?')
+        .then(() => {
+            // Pizza order confirmed.
+        }, err => {
+            // Pizza order cancelled.
+        });
+}
+```
