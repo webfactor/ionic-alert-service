@@ -1,20 +1,18 @@
 {
-  "name": "@webfactor/ionic-alert-service",
-  "version": "3.0.0",
-  "repository": {
-    "type": "git",
-    "url": "url"
-  },
-  "keywords": [
-    "angular"
-  ],
-  "license": "MIT",
-  "main": "./bundles/ionic-alert-service.umd.js",
-  "es2015": "./esm2015/ionic-alert-service.js",
-  "module": "./esm5/ionic-alert-service.es5.js",
-  "typings": "./ionic-alert-service.d.ts",
-  "peerDependencies": {
-    "@ngx-translate/core": "^9.1.1",
-    "ionic-angular": "^3.9.2"
-  }
+    "name": "@webfactor/ionic-alert-service",
+    "version": "3.0.1",
+    "repository": {
+        "type": "git",
+        "url": "url"
+    },
+    "keywords": ["angular"],
+    "license": "MIT",
+    "main": "./bundles/ionic-alert-service.umd.js",
+    "es2015": "./esm2015/ionic-alert-service.js",
+    "module": "./esm5/ionic-alert-service.es5.js",
+    "typings": "./ionic-alert-service.d.ts",
+    "peerDependencies": {
+        "@ngx-translate/core": "^9.1.1",
+        "ionic-angular": "^3.9.2"
+    }
 }
