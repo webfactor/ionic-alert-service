@@ -62,6 +62,30 @@ export class AlertService {
         });
     }
 
+    async confirmDelete(message: string, title: string = null): Promise<any> {
+        this.translations = await this.getTranslations();
+
+        return new Promise((resolve, reject) => {
+            let options = {
+                title,
+                message,
+                buttons: [
+                    {
+                        text: this.translations.cancel,
+                        handler: () => reject()
+                    },
+                    {
+                        text: this.translations.delete,
+                        handler: () => resolve()
+                    }
+                ]
+            };
+
+            let alert = this.alertCtrl.create(options);
+            alert.present();
+        });
+    }
+
     shortToast(message: string, position: 'top' | 'middle' | 'bottom' = 'bottom'): Promise<any> {
         return this.toastWithOptions(message, position);
     }
