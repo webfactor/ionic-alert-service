@@ -89,13 +89,19 @@ export class AlertService {
         });
     }
 
-    async confirmSaveDismiss(message: string, title: string = null, subTitle: string = null): Promise<any> {
+    async confirmSaveDismiss(
+        message: string,
+        title: string = null,
+        subTitle: string = null,
+        enableBackdropDismiss: boolean = true
+    ): Promise<any> {
         this.translations = await this.getTranslations();
 
         return new Promise((resolve, reject) => {
             let options = {
                 title,
                 message,
+                enableBackdropDismiss,
                 buttons: [
                     {
                         text: this.translations.dismiss || this.dismiss,

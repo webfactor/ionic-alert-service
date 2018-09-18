@@ -46,7 +46,8 @@ Presents an confirmation dialog. The Promise is fulfilled on accept, rejected on
 confirmSaveDismiss(message: string, title: string = null, subTitle: string = null): Promise<any>
 ```
 
-Presents an confirmation dialog. The Promise is fulfilled on accept, rejected on decline. Replace translation ok with save and cancel with dismiss
+Presents an confirmation dialog. The Promise is fulfilled on accept, rejected on decline. Replace translation ok with save and cancel with dismiss.
+enableBackdropDismiss option
 
 ```typescript
 shortToast(message: string, position: 'top' | 'middle' | 'bottom' = 'bottom'): Promise<any>
