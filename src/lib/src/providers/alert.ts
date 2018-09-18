@@ -5,8 +5,11 @@ import { AlertController, ToastController } from 'ionic-angular';
 @Injectable()
 export class AlertService {
     translations: any = {};
+    save: string = 'Speichern';
+    dismiss: string = 'Verwerfen';
     ok: string = 'OK';
-    cancel: string = 'Abbrechen';
+    cancel: string = 'Abbruch';
+    delete: string = 'Löschen';
 
     constructor(
         private alertCtrl: AlertController,
@@ -71,11 +74,35 @@ export class AlertService {
                 message,
                 buttons: [
                     {
-                        text: this.translations.cancel,
+                        text: this.translations.cancel || this.cancel,
                         handler: () => reject()
                     },
                     {
-                        text: this.translations.delete,
+                        text: this.translations.delete || this.delete,
+                        handler: () => resolve()
+                    }
+                ]
+            };
+
+            let alert = this.alertCtrl.create(options);
+            alert.present();
+        });
+    }
+
+    async confirmSaveDismiss(message: string, title: string = null, subTitle: string = null): Promise<any> {
+        this.translations = await this.getTranslations();
+
+        return new Promise((resolve, reject) => {
+            let options = {
+                title,
+                message,
+                buttons: [
+                    {
+                        text: this.translations.dismiss || this.dismiss,
+                        handler: () => reject()
+                    },
+                    {
+                        text: this.translations.save || this.save,
                         handler: () => resolve()
                     }
                 ]

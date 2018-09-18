@@ -1,33 +1,52 @@
 # AlertService
 
-Displays alerts and confirmation dialogs and toasts the easy way! 🚨 
+Displays alerts and confirmation dialogs and toasts the easy way! 🚨
 
 ## Installation
 
-- Install `@webfactor/ionic-alert-service` via npm.
-- Add `AlertServiceModule.forRoot()` to your Ionic module imports.
+-   Install `@webfactor/ionic-alert-service` via npm.
+-   Add `AlertServiceModule.forRoot()` to your Ionic module imports.
 
 This service epends on `@ngx-translate/core', which should be installed and implemented.  
-The dialogs expect the following translations. If not present, "Ok" and "Abbrechen" are used.
+The dialogs expect the following translations. If not present, "Ok","Abbrechen","Löschen","Speichern" and "Verwerfen" are used.
+
 ```json
 {
     "global": {
         "ok": "Yep!",
-        "cancel": "Nope!"
+        "cancel": "Nope!",
+        "delete": "Löschen",
+        "save": "Speichern",
+        "dismiss": "Verwerfen"
     }
 }
 ```
 
 ## Methods
+
 ```typescript
 alert(message: string, title: string = null, subTitle: string = null): Promise<any>
 ```
+
 Presents an alert. The Promise is fulfilled when closing the dialog.
 
 ```typescript
 confirm(message: string, title: string = null, subTitle: string = null): Promise<any>
 ```
+
 Presents an confirmation dialog. The Promise is fulfilled on accept, rejected on decline.
+
+```typescript
+confirmDelete(message: string, title: string = null, subTitle: string = null): Promise<any>
+```
+
+Presents an confirmation dialog. The Promise is fulfilled on accept, rejected on decline. Replace translation cancel with delete
+
+```typescript
+confirmSaveDismiss(message: string, title: string = null, subTitle: string = null): Promise<any>
+```
+
+Presents an confirmation dialog. The Promise is fulfilled on accept, rejected on decline. Replace translation ok with save and cancel with dismiss
 
 ```typescript
 shortToast(message: string, position: 'top' | 'middle' | 'bottom' = 'bottom'): Promise<any>
@@ -42,10 +61,12 @@ toastWithOptions(
     closeButtonText: string = 'OK'
 ): Promise<any>
 ```
+
 Presents a toast message.  
 The Promise is fulfilled when transition is completed.
 
 ## Example
+
 ```typescript
 constructor(private alertService: AlertService) {}
 
