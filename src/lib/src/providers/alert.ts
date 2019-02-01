@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { AlertController, ToastController } from 'ionic-angular';
+import { Alert, AlertController, ToastController } from 'ionic-angular';
 
 @Injectable()
 export class AlertService {
@@ -10,7 +10,7 @@ export class AlertService {
     ok: string = 'OK';
     cancel: string = 'Abbruch';
     delete: string = 'Löschen';
-
+    alertObject: Alert;
     constructor(
         private alertCtrl: AlertController,
         private translate: TranslateService,
@@ -144,5 +144,43 @@ export class AlertService {
             closeButtonText: closeButtonText || this.translations.ok || this.ok
         });
         return toast.present();
+    }
+
+    timeAlert(
+        title: string,
+        message: string,
+        enableBackdropDismiss: boolean,
+        okButton: string,
+        cancelButton: string,
+        timeoutMilSeconds: number
+    ): Promise<any> {
+        return new Promise((resolve, reject) => {
+            let options = {
+                title,
+                message,
+                enableBackdropDismiss,
+                buttons: [
+                    {
+                        text: cancelButton || this.cancel,
+                        handler: () => reject()
+                    },
+                    {
+                        text: okButton || this.ok,
+                        handler: () => resolve()
+                    }
+                ]
+            };
+
+            this.alertObject = this.alertCtrl.create(options);
+            this.alertObject.present();
+
+            setTimeout(() => {
+                this.dismissAlert();
+            }, timeoutMilSeconds);
+        });
+    }
+
+    public dismissAlert(): void {
+        if (this.alertObject) this.alertObject.dismiss();
     }
 }
